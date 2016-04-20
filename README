@@ -16,5 +16,5 @@ PFC_competition defines two assemblies in a single-layer PFC network and probes 
 ------------------------------------------------------------
 
 To install DynaSim using Git: git clone https://github.com/dynasim/dynasim.git
-Then add the dynasim toolbox to Matlab path and run model scripts from the directory containing them.
+Add the dynasim toolbox to Matlab path and run model scripts from the directory containing them.
 
