@@ -26,7 +26,7 @@ function spec = get_PFC_cell(type,N)
 % [DS02] Durstewitz, D., & Seamans, J. K. (2002). The computational role of dopamine D1 receptors in working memory. Neural Networks, 15(4), 561-572.
 % [KS14] Konstantoudaki, X., Papoutsi, A., Chalkiadaki, K., Poirazi, P., & Sidiropoulou, K. (2014). Modulatory effects of inhibition on persistent activity in a cortical microcircuit model. Frontiers in neural circuits, 8, 1-15.
 % [TW03] Traub, R. D., Buhl, E. H., Gloveli, T., & Whittington, M. A. (2003). Fast rhythmic bursting can be induced in layer 2/3 cortical neurons by enhancing persistent Na+ conductance or by blocking BK channels. Journal of neurophysiology, 89(2), 909-921.
-% [WB96]: Wang, Xiao-Jing, and György Buzsáki. "Gamma oscillation by synaptic inhibition in a hippocampal interneuronal network model." The journal of Neuroscience 16.20 (1996): 6402-6413.
+% [WB96]: Wang, Xiao-Jing, and Gy??rgy Buzs??ki. "Gamma oscillation by synaptic inhibition in a hippocampal interneuronal network model." The journal of Neuroscience 16.20 (1996): 6402-6413.
 % 
 % Examples:
 % 
@@ -264,6 +264,7 @@ switch type
     gH=0e-5;              % max conductance of h-channel
     tauCa=250;            % ms, calcium decay time constant
     CAF=600;              % calcium accumulation factor
+    htaunap=.5; % JSS made this change to speed up adaptation and time to reach SS firing
     VshellK=pi*dshellK*l.*(d+dshellK);    % um3, volume of extracellular shell for K+ diffusion/accumulation
     VshellCa=pi*dshellCa*l.*(d-dshellCa); % um3, volume of intracellular shell for Ca2+ diffusion/accumulation
     spec.populations(1).name='Es';
@@ -272,7 +273,7 @@ switch type
     spec.populations(1).mechanism_list=mechanism_list;
     spec.populations(1).parameters={'Iapp',0,'Cm',Cm*A,'gpas',gpas*A,'epas',epas,'gH',gH*A,'area',A,...
       'gnaf',gnaf*A,'gnap',gnap*A,'ghva',ghva*A,'gkdr',gkdr*A,'gks',gks*A,'gkc',gkc*A,...
-      'CAF',CAF,'VshellCa',VshellCa,'cainf',cainf,'tauCa',tauCa,'cao',cao,...
+      'CAF',CAF,'VshellCa',VshellCa,'cainf',cainf,'tauCa',tauCa,'cao',cao,'htaunap',htaunap,...
       'KAF',KAF,'VshellK',VshellK,'koinf',koinf,'tauK',tauK,'ki',ki,'faraday',faraday};
 
     % dendrite
@@ -288,6 +289,7 @@ switch type
     gH=.01e-5;            % max conductance of h-channel
     tauCa=120;            % ms, calcium decay time constant
     CAF=600;              % calcium accumulation factor
+    htaunap=.5; % JSS made this change to speed up adaptation and time to reach SS firing
     VshellK=pi*dshellK*l.*(d+dshellK);    % um3, volume of extracellular shell for K+ diffusion/accumulation
     VshellCa=pi*dshellCa*l.*(d-dshellCa); % um3, volume of intracellular shell for Ca2+ diffusion/accumulation
     spec.populations(2).name='Ed';
@@ -296,7 +298,7 @@ switch type
     spec.populations(2).mechanism_list=mechanism_list;
     spec.populations(2).parameters={'Iapp',0,'Cm',Cm*A,'gpas',gpas*A,'epas',epas,'gH',gH*A,'area',A,...
       'gnaf',gnaf*A,'gnap',gnap*A,'ghva',ghva*A,'gkdr',gkdr*A,'gks',gks*A,'gkc',gkc*A,...
-      'CAF',CAF,'VshellCa',VshellCa,'cainf',cainf,'tauCa',tauCa,'cao',cao,...
+      'CAF',CAF,'VshellCa',VshellCa,'cainf',cainf,'tauCa',tauCa,'cao',cao,'htaunap',htaunap,...
       'KAF',KAF,'VshellK',VshellK,'koinf',koinf,'tauK',tauK,'ki',ki,'faraday',faraday};
 
     % intercompartmental connections
@@ -580,11 +582,11 @@ switch type
 end
 
 % Additional References (experiments):
-% [ZK05] Zaitsev, A. V., Gonzalez-Burgos, G., Povysheva, N. V., Kröner, S., Lewis, D. A., & Krimer, L. S. (2005). Localization of calcium-binding proteins in physiologically and morphologically characterized interneurons of monkey dorsolateral prefrontal cortex. Cerebral Cortex, 15(8), 1178-1186.
-% [ZL09] (DLPFC L2/3 INs) Zaitsev, A. V., Povysheva, N. V., Gonzalez-Burgos, G., Rotaru, D., Fish, K. N., Krimer, L. S., & Lewis, D. A. (2009). Interneuron diversity in layers 2–3 of monkey prefrontal cortex. Cerebral cortex, 19(7), 1597-1615.
+% [ZK05] Zaitsev, A. V., Gonzalez-Burgos, G., Povysheva, N. V., Kr??ner, S., Lewis, D. A., & Krimer, L. S. (2005). Localization of calcium-binding proteins in physiologically and morphologically characterized interneurons of monkey dorsolateral prefrontal cortex. Cerebral Cortex, 15(8), 1178-1186.
+% [ZL09] (DLPFC L2/3 INs) Zaitsev, A. V., Povysheva, N. V., Gonzalez-Burgos, G., Rotaru, D., Fish, K. N., Krimer, L. S., & Lewis, D. A. (2009). Interneuron diversity in layers 2???3 of monkey prefrontal cortex. Cerebral cortex, 19(7), 1597-1615.
 % [K93] (rat PrL L5 FS vs LTS) Kawaguchi, Y. A. S. U. O. (1993). Groupings of nonpyramidal and pyramidal cells with specific physiological and morphological characteristics in rat frontal cortex. Journal of neurophysiology, 69(2), 416-431.
 % [GG03] Gao, W. J., Wang, Y., & Goldman-Rakic, P. S. (2003). Dopamine modulation of perisomatic and peridendritic inhibition in prefrontal cortex. The Journal of neuroscience, 23(5), 1622-1630.
-% [VM09] Van Aerde, K. I., Mann, E. O., Canto, C. B., Heistek, T. S., Linkenkaer‐Hansen, K., Mulder, A. B., ... & Mansvelder, H. D. (2009). Flexible spike timing of layer 5 neurons during dynamic beta oscillation shifts in rat prefrontal cortex. The Journal of physiology, 587(21), 5177-5196. http://onlinelibrary.wiley.com/doi/10.1113/jphysiol.2009.178384/full
+% [VM09] Van Aerde, K. I., Mann, E. O., Canto, C. B., Heistek, T. S., Linkenkaer???Hansen, K., Mulder, A. B., ... & Mansvelder, H. D. (2009). Flexible spike timing of layer 5 neurons during dynamic beta oscillation shifts in rat prefrontal cortex. The Journal of physiology, 587(21), 5177-5196. http://onlinelibrary.wiley.com/doi/10.1113/jphysiol.2009.178384/full
 % Results:
   % [ZK05]: Rin [MOhm]: FS (235+/-68), RSNP (582+/-195), IS (585+/-137)
   % [K93]: LTS RMP: -64mV (same as CB RS in [KS14]) > FS RMP
