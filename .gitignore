@@ -7,3 +7,5 @@ solve/*
 solve/**
 data/
 studies/
+study_*
+study_*/
