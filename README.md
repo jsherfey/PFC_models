@@ -16,6 +16,6 @@ The model by Jason Sherfey consists of cells from the Durstewitz model as well a
 
 ------------------------------------------------------------
 
-To install DynaSim using Git: `git clone https://github.com/dynasim/dynasim.git`
+To install DynaSim using Git: `git clone https://github.com/dynasim/dynasim.git`.
 Add the dynasim toolbox to Matlab path and run model scripts from the directory containing them.
 
