@@ -3,7 +3,7 @@
 gnap=2.2; 	% mS/cm2, maximal conductance
 ENa=55;  	% mV, sodium reversal potential
 IC_noise=0;
-htaunap=2; % set to 2 for DA sims
+htaunap=1; % set to 2 for DA sims
 
 % Functions
 eps=.00000001;
