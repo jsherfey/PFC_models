@@ -5,8 +5,7 @@ Download the repo using git (or github): `git clone https://github.com/jsherfey/
 
 All models are implemented in the DynaSim Matlab toolbox: https://github.com/DynaSim/DynaSim
 
-To get started with individual PFC cell models, see "PFC_cells_explicit".
-To get started with PFC network models, see "PFC_2layers".
+To get started with individual PFC cell models, see "PFC_cells_explicit".  To get started with PFC network models, see "PFC_2layers".
 
 The PFC network model is based on a simpler one with pyramidal cells and fast-spiking interneurons by Durstewitz et al. Matlab implementations of 2002 and 2007 versions of the original model and references can be found in the "Durstewitz" folder in DS02_PFC_deep.m and DG07_PFC_deep.m, respectively.
 
