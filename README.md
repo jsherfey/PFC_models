@@ -1,7 +1,7 @@
 #PFC Models
 This repository contains a collection of neural models for prefrontal cortical (PFC) cells and networks.
 
-Download the repo using git (or github): `git clone https://github.com/jsherfey/PFC_models.git`
+Download the repo on github or using git: `git clone https://github.com/jsherfey/PFC_models.git`
 
 All models are implemented in the DynaSim Matlab toolbox: https://github.com/DynaSim/DynaSim
 
