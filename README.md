@@ -12,7 +12,7 @@ The PFC network model is based on a simpler one with pyramidal cells and fast-sp
 The model by Jason Sherfey consists of cells from the Durstewitz model as well as others. DynaSim implementations of each cell model, references, and supplemental info can be found in [`PFC_cells`](https://github.com/jsherfey/PFC_models/blob/master/PFC_cells.m). [`get_PFC_cell`](https://github.com/jsherfey/PFC_models/blob/master/get_PFC_cell.m) is a function that can be used to retrieve DynaSim specifications of individual cell models. Similarly, [`PFC_1layer`](https://github.com/jsherfey/PFC_models/blob/master/PFC_1layer.m) and [`get_PFC_1layer`](https://github.com/jsherfey/PFC_models/blob/master/get_PFC_1layer.m) are script and function forms of a single-layer PFC network model with pyramidal cells, PV+ FS cells, and CB+ RSNP cells. 
 
 [`PFC_2layers`](https://github.com/jsherfey/PFC_models/blob/master/PFC_2layers.m) is a script that constructs a two-layer PFC model representing minimal superficial and deep layers.
-`PFC_competition` ([work-in-progress](https://github.com/jsherfey/PFC_simulations/blob/master/PFC_competition.m)) defines two assemblies in a single-layer PFC network and probes how they compete when they are driven by inputs with varying rhythmicity and synchrony.
+[`PFC_competition`](https://github.com/jsherfey/PFC_simulations/blob/master/PFC_competition.m) defines two assemblies in a single-layer PFC network and probes how they compete when they are driven by inputs with varying rhythmicity and synchrony.
 
 ------------------------------------------------------------
 
