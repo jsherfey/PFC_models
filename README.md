@@ -1,4 +1,4 @@
-#PFC Models
+# PFC Models
 This repository contains a collection of neural models for prefrontal cortical (PFC) cells and networks.
 
 Download the repo on [github](https://github.com/jsherfey/PFC_models) or using git: `git clone https://github.com/jsherfey/PFC_models.git`
