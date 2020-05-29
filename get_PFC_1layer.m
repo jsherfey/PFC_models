@@ -126,7 +126,7 @@ spec.connections(end).mechanism_list={'iGABA'};
 spec.connections(end).parameters={'gGABA',gGABAii*Nin/Nrs,'tauGABAr',tauGABAr,'tauGABA',tauGABAdCB,'EGABA',-75};
 
 % remove populations with size=0
-spec=CheckSpecification(spec);
+spec=dsCheckSpecification(spec);
 
 if 0
   % -------------------------------------------------------------------------
@@ -144,8 +144,8 @@ if 0
   vary={'Es','Iapp',.1};
 
   % run simulation
-  data=SimulateModel(spec,'vary',vary,solver_options{:});
+  data=dsSimulate(spec,'vary',vary,solver_options{:});
 
   % plot results
-  PlotData(data);
+  dsPlot(data);
 end
