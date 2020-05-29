@@ -36,25 +36,25 @@ modifications={...
   '(FS->FS,RSNP->RSNP)','gGABA',0; % remove within-population inhibition
   'Es->Ed','netcon',Kee       % set connectivity matrix from PY soma to dendrite
   };
-L1=ApplyModifications(L1,modifications);
+L1=dsApplyModifications(L1,modifications);
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Deep layer: PY and FS cells
 L2=get_PFC_1layer('DS02PYjs',Ne,'DS02FSjs',Ni,[],0);
 modifications={...
   'FS->FS','gGABA',0 % remove within-population inhibition
   };
-L2=ApplyModifications(L2,modifications);
+L2=dsApplyModifications(L2,modifications);
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % prepend layer-distinguising layer_id to names in populations and connections
 layer_id='L1';
 for i=1:length(L1.populations) 
   oldname=L1.populations(i).name;
-	L1=ApplyModifications(L1,{oldname,'name',[layer_id oldname]});
+	L1=dsApplyModifications(L1,{oldname,'name',[layer_id oldname]});
 end
 layer_id='L2';
 for i=1:length(L2.populations) 
   oldname=L2.populations(i).name;
-	L2=ApplyModifications(L2,{oldname,'name',[layer_id oldname]});
+	L2=dsApplyModifications(L2,{oldname,'name',[layer_id oldname]});
 end
 
 % Combine network specifications to form a two-layer model
@@ -76,7 +76,7 @@ input_def={'input(V)=iAMPA(V); monitor input; onset=50; offset=inf;';
            'sAMPA=getPoissonGating(0,dcAMPA,0,0,0,onset,offset,tauAMPA,T,Npop); dcAMPA=0; tauAMPA=2;';
           }; % {'gAMPA',1e-3 to 1e-5,'dcAMPA',20e3,'Iapp',.1}; % [gAMPA]=uS, [dcAMPA]=Hz
 state_equations=['dV/dt=(@current+input(V)+Iapp*(t>onset&t<offset))./Cm; Cm=1; Iapp=0; V(0)=-65;' input_def{:}];
-spec=ApplyModifications(spec,{'L1Ed','equations',state_equations});
+spec=dsApplyModifications(spec,{'L1Ed','equations',state_equations});
 
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Run simulations
@@ -87,9 +87,9 @@ spec=ApplyModifications(spec,{'L1Ed','equations',state_equations});
 vary={'L1Ed','Iapp',0;'L1Ed','gAMPA',1e-4;'L1Ed','dcAMPA',20e3;'L1Ed','offset',1000};
 % vary={'(L1Es->L1Ed,L2Es->L2Ed)','gNMDA',[5e-4 5e-3 5e-2 5e-1];'(L1Es->L1Ed,L2Es->L2Ed)','gAMPA',0;'L1Ed','Iapp',0;'L1Ed','gAMPA',1e-4;'L1Ed','dcAMPA',20e3;'L1Ed','offset',1000};
 solver_options={'tspan',[0 1500],'solver','rk1','dt',.01,'compile_flag',1,'verbose_flag',1};
-data=SimulateModel(spec,'vary',vary,solver_options{:});
+data=dsSimulate(spec,'vary',vary,solver_options{:});
 
-PlotData(data,'plot_type','rastergram','threshold',-10);
-PlotData(data,'plot_type','waveform');
+dsPlot(data,'plot_type','rastergram','threshold',-10);
+dsPlot(data,'plot_type','waveform');
 
 
