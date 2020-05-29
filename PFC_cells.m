@@ -125,8 +125,8 @@ end
 % Units: [Ri]=MOhm*um, [r]=[L]=um, then [g12]=uS/um2 and [gCOM]=uS. Ra=1/gCOM
 % Reference: https://en.wikipedia.org/wiki/Compartmental_modelling_of_dendrites
 
-data=SimulateModel(spec,'tspan',[0 2000],'vary',{'Es','Iapp',.1},'solver','rk1','verbose_flag',1);
-PlotData(data,'ylim',[-100 50]);
+data=dsSimulate(spec,'tspan',[0 2000],'vary',{'Es','Iapp',.1},'solver','rk1','verbose_flag',1);
+dsPlot(data,'ylim',[-100 50]);
 
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % -------------------------------------------------------------------------
@@ -176,8 +176,8 @@ spec.populations(1).parameters={'Iapp',0,'Cm',Cm*A,'gpas',gpas*A,'epas',epas,...
   'gnaf',gnaf*A,'gkdr',gkdr*A,'KAF',KAF,'VshellK',VshellK,'koinf',koinf,'tauK',tauK,'ki',ki,'faraday',faraday,...
   'anV0',anV0,'bnV0',bnV0,'hnascale',hnascale,'amV0',amV0,'bmV0',bmV0,'ahV0',ahV0,'bhV0',bhV0};
 
-data=SimulateModel(spec,'tspan',[0 2000],'vary',{'FS','Iapp',.1},'solver','rk1','verbose_flag',1);
-PlotData(data,'ylim',[-100 50]);
+data=dsSimulate(spec,'tspan',[0 2000],'vary',{'FS','Iapp',.1},'solver','rk1','verbose_flag',1);
+dsPlot(data,'ylim',[-100 50]);
 
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % -------------------------------------------------------------------------
@@ -230,8 +230,8 @@ spec.populations(1).parameters={'Iapp',0,'Cm',Cm*A,'gpas',gpas*A,'epas',epas,'gH
   'gnaf',gnaf*A,'gkdr',gkdr*A,'KAF',KAF,'VshellK',VshellK,'koinf',koinf,'tauK',tauK,'ki',ki,'faraday',faraday,...
   'anV0',anV0,'bnV0',bnV0,'hnascale',hnascale,'amV0',amV0,'bmV0',bmV0,'ahV0',ahV0,'bhV0',bhV0};
 
-data=SimulateModel(spec,'tspan',[0 200],'vary',{'FS','Iapp',[-.1 0 .1 .2]},'solver','rk1');
-PlotData(data,'ylim',[-120 60]);
+data=dsSimulate(spec,'tspan',[0 200],'vary',{'FS','Iapp',[-.1 0 .1 .2]},'solver','rk1');
+dsPlot(data,'ylim',[-120 60]);
 
 Rin_fs=(1/gpas)/A % MOhm
 
@@ -286,8 +286,8 @@ spec.populations(1).parameters={'Iapp',0,'Cm',Cm*A,'gpas',gpas*A,'epas',epas,'gH
   'gnaf',gnaf*A,'gkdr',gkdr*A,'KAF',KAF,'VshellK',VshellK,'koinf',koinf,'tauK',tauK,'ki',ki,'faraday',faraday,...
   'anV0',anV0,'bnV0',bnV0,'hnascale',hnascale,'amV0',amV0,'bmV0',bmV0,'ahV0',ahV0,'bhV0',bhV0};
 
-data=SimulateModel(spec,'tspan',[0 200],'vary',{'RSNP','Iapp',[-.1 0 .1 .2]},'solver','rk1');
-PlotData(data,'ylim',[-120 60]);
+data=dsSimulate(spec,'tspan',[0 200],'vary',{'RSNP','Iapp',[-.1 0 .1 .2]},'solver','rk1');
+dsPlot(data,'ylim',[-120 60]);
 
 Rin_rs=(1/gpas)/A % MOhm
 
@@ -395,14 +395,14 @@ for c=1:length(connections)
   spec.connections(c).parameters={'gCOM',gCOM};
 end
 
-data=SimulateModel(spec,'tspan',[0 2000],'vary',{'Es','Iapp',.1},'solver','rk1','verbose_flag',1);
-PlotData(data,'ylim',[-100 50]);
+data=dsSimulate(spec,'tspan',[0 2000],'vary',{'Es','Iapp',.1},'solver','rk1','verbose_flag',1);
+dsPlot(data,'ylim',[-100 50]);
 
 % characterize cell intrinsic properties
 if 0 
   amps=[ -.2 -.1 0 .1 .2 .5]*10; onset=50; offset=250; tspan=[0 300];
   data = ProbeCellProperties(spec,'membrane_area',A,'amplitudes',amps,'onset',onset,'offset',offset,'tspan',tspan);
-  PlotData(data,'ylim',[-120 60])
+  dsPlot(data,'ylim',[-120 60])
   s = CalcCellProperties(data); l=spec.populations(1).name;
   [s.(l).tau_m s.(l).RMP s.(l).V_thresh s.(l).AP_dur s.(l).Ih_abssag s.(l).AHP_time2trough]
   % PYs: [48.41   -59.96      -37.93        1.1400          0           4.1500
@@ -500,8 +500,8 @@ spec.populations(1).parameters={'Iapp',0,'Cm',Cm*A,'gpas',gpas*A,'epas',epas,'gH
   'gnaf',gnaf*A,'gkdr',gkdr*A,'KAF',KAF,'VshellK',VshellK,'koinf',koinf,'tauK',tauK,'ki',ki,'faraday',faraday,...
   'anV0',anV0,'bnV0',bnV0,'hnascale',hnascale,'amV0',amV0,'bmV0',bmV0,'ahV0',ahV0,'bhV0',bhV0};
 
-data=SimulateModel(spec,'tspan',[0 200],'vary',{'FS','Iapp',[-.1 0 .1 .2 .5]},'solver','rk1');
-PlotData(data,'ylim',[-120 60]);
+data=dsSimulate(spec,'tspan',[0 200],'vary',{'FS','Iapp',[-.1 0 .1 .2 .5]},'solver','rk1');
+dsPlot(data,'ylim',[-120 60]);
 
 Rin_fs=(1/gpas)/A % MOhm
 
@@ -509,7 +509,7 @@ Rin_fs=(1/gpas)/A % MOhm
 if 0 
   amps=[ -.2 -.1 0 .1 .2 .5]*10; onset=50; offset=250; tspan=[0 300];
   data = ProbeCellProperties(spec,'membrane_area',A,'amplitudes',amps,'onset',onset,'offset',offset,'tspan',tspan);
-  PlotData(data,'ylim',[-120 60])
+  dsPlot(data,'ylim',[-120 60])
   s = CalcCellProperties(data); l=spec.populations(1).name;
   [s.(l).tau_m s.(l).RMP s.(l).V_thresh s.(l).AP_dur s.(l).Ih_abssag s.(l).AHP_time2trough]
 %gkdr=36:[8.4000   -72.8196     -48.7907    0.8300         0.9751        2.6400]
@@ -563,8 +563,8 @@ spec.populations(1).parameters={'Iapp',0,'Cm',Cm*A,'gpas',gpas*A,'epas',epas,'gH
   'gnaf',gnaf*A,'gkdr',gkdr*A,'KAF',KAF,'VshellK',VshellK,'koinf',koinf,'tauK',tauK,'ki',ki,'faraday',faraday,...
   'anV0',anV0,'bnV0',bnV0,'hnascale',hnascale,'amV0',amV0,'bmV0',bmV0,'ahV0',ahV0,'bhV0',bhV0};
 
-data=SimulateModel(spec,'tspan',[0 200],'vary',{'RSNP','Iapp',[-.1 0 .1 .2 .5]},'solver','rk1');
-PlotData(data,'ylim',[-120 60]);
+data=dsSimulate(spec,'tspan',[0 200],'vary',{'RSNP','Iapp',[-.1 0 .1 .2 .5]},'solver','rk1');
+dsPlot(data,'ylim',[-120 60]);
 
 Rin_rs=(1/gpas)/A % MOhm
 
@@ -572,7 +572,7 @@ Rin_rs=(1/gpas)/A % MOhm
 if 0 
   amps=[ -.2 -.1 0 .1 .2 .5]*10; onset=50; offset=250; tspan=[0 300];
   data = ProbeCellProperties(spec,'membrane_area',A,'amplitudes',amps,'onset',onset,'offset',offset,'tspan',tspan);
-  PlotData(data,'ylim',[-120 60])
+  dsPlot(data,'ylim',[-120 60])
   s = CalcCellProperties(data); l=spec.populations(1).name;
   [s.(l).tau_m s.(l).RMP s.(l).V_thresh s.(l).AP_dur s.(l).Ih_abssag s.(l).AHP_time2trough]
   % [31.4500    -65.9983  -45.8906          0.8800         0          3.7400]
