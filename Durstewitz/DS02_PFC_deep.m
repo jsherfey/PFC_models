@@ -277,10 +277,10 @@ if 1 % transient input to E-cells
   vary={'Ed','(dcAMPA,dcNMDA)',30e3;'(FS,Es)','(gAMPA,gNMDA,gGABA)',0;'Ed','onset',50;'Ed','offset',250}; 
 end
 data=dsSimulate(spec,'vary',vary,solver_options{:},'verbose_flag',1);
-dsData(data,'ylim',[-100 50]);
-dsData(data,'plot_type','rastergram');
-% dsData(data(2),'variable',{'Es_V','Es_CaDyn_cai','Es_iKCa_c','Es_iHVA_u','Es_iHVA_w'});
-% dsData(data,'variable',{'Es_V','Es_iDR_iKDR','Es_KDyn_ko','Es_iDR_EK'});
-% dsData(d,'variable',{'V','IKDR','ko','EK'})
+dsPlot(data,'ylim',[-100 50]);
+dsPlot(data,'plot_type','rastergram');
+% dsPlot(data(2),'variable',{'Es_V','Es_CaDyn_cai','Es_iKCa_c','Es_iHVA_u','Es_iHVA_w'});
+% dsPlot(data,'variable',{'Es_V','Es_iDR_iKDR','Es_KDyn_ko','Es_iDR_EK'});
+% dsPlot(d,'variable',{'V','IKDR','ko','EK'})
 
 
