@@ -238,11 +238,11 @@ solver_options={'tspan',[0 10000],'solver','rk2','compile_flag',1}; vary=[];
 if 0 % synaptic blockers
   vary={'(Es->Ed,Es->FS)','(gAMPA,gNMDA)',0;'(FS->FS,FS->Es)','gGABA',0}; % turn off connections
 end
-data=SimulateModel(spec,'vary',vary,solver_options{:},'verbose_flag',1);
-PlotData(data,'ylim',[-100 50]);
-PlotData(data,'plot_type','rastergram');
-% PlotData(data(2),'variable',{'Es_V','Es_CaDyn_cai','Es_iKCa_c','Es_iHVA_u','Es_iHVA_w'});
-% PlotData(data,'variable',{'Es_V','Es_iDR_iKDR','Es_KDyn_ko','Es_iDR_EK'});
-% PlotData(d,'variable',{'V','IKDR','ko','EK'})
+data=dsSimulate(spec,'vary',vary,solver_options{:},'verbose_flag',1);
+dsPlot(data,'ylim',[-100 50]);
+dsData(data,'plot_type','rastergram');
+% dsData(data(2),'variable',{'Es_V','Es_CaDyn_cai','Es_iKCa_c','Es_iHVA_u','Es_iHVA_w'});
+% dsData(data,'variable',{'Es_V','Es_iDR_iKDR','Es_KDyn_ko','Es_iDR_EK'});
+% dsData(d,'variable',{'V','IKDR','ko','EK'})
 
 
