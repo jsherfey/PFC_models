@@ -92,7 +92,7 @@ solver_options={'tspan',tspan,'solver','rk2','dt',dt,'compile_flag',compile_flag
 vary={'Es','Iapp',.1};
 
 % run simulation
-data=SimulateModel(spec,'vary',vary,solver_options{:});
+data=dsSimulate(spec,'vary',vary,solver_options{:});
 
 % plot results
-PlotData(data);
+dsPlot(data);
