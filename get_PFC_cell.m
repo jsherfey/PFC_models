@@ -32,70 +32,70 @@ function spec = get_PFC_cell(type,N)
 % 
 % % Example 1: load two-compartment PY cell, increase Iapp to soma and plot V:
 % spec=get_PFC_cell('DS02PYjs'); % load cell specification (two compartments: 'Es' and 'Ed')
-% data=SimulateModel(spec,'tspan',[0 500],'vary',{'Es','Iapp',.1},'solver','rk1','verbose_flag',1);
-% PlotData(data);
+% data=dsSimulate(spec,'tspan',[0 500],'vary',{'Es','Iapp',.1},'solver','rk1','verbose_flag',1);
+% dsPlot(data);
 % 
 % % Example 2: load and characterize single-compartment FS model (taum) 
 % % for different values of Rm (Rin)
 % spec=get_PFC_cell('DS02FSjs'); % note: spec.populations.name = 'FS'
-% model=GenerateModel(spec);
+% model=dsGenerateModel(spec);
 % amps=[-2 -1 0 5 10]; onset=50; offset=250; tspan=[0 300];
 % data=ProbeCellProperties(model,'membrane_area',model.parameters.FS_area,'amplitudes',amps,'onset',onset,'offset',offset,'tspan',tspan,'solver','rk1');
 % stats=CalcCellProperties(data); 
-% PlotData(data,'ylim',[-100 50]);
+% dsPlot(data,'ylim',[-100 50]);
 % fprintf('Rin=%gMOhm: taum=%gms (theory: taum=Rm*Cm, Rin=Rm/area)\n',1/model.parameters.FS_pas_gpas,stats.FS.tau_m);
-% model=ApplyModifications(model,{'FS','gpas',2*model.parameters.FS_pas_gpas});
+% model=dsApplyModifications(model,{'FS','gpas',2*model.parameters.FS_pas_gpas});
 % data=ProbeCellProperties(model,'membrane_area',model.parameters.FS_area,'amplitudes',amps,'onset',onset,'offset',offset,'tspan',tspan,'solver','rk1');
 % stats=CalcCellProperties(data);
-% PlotData(data,'ylim',[-100 50]);
+% dsPlot(data,'ylim',[-100 50]);
 % fprintf('Rin=%gMOhm: taum=%gms (theory: taum=Rm*Cm, Rin=Rm/area)\n',1/model.parameters.FS_pas_gpas,stats.FS.tau_m);
 % % tip: other intrinsic property measures are stored in stats (e.g., RMP, Vthresh, spikewidth)
 % 
 % % Example 3: load and characterize multicompartment PY model (taum) for
 % % different values of Cm (adjusted in all compartments) with current applied to soma
 % spec=get_PFC_cell('DS02PYjs');
-% model=GenerateModel(spec);
+% model=dsGenerateModel(spec);
 % amps=[-2 -1 0 5 10]/5; onset=50; offset=250; tspan=[0 300];
 % data=ProbeCellProperties(model,'remove_connections_flag',0,'membrane_area',model.parameters.Es_area,'amplitudes',amps,'onset',onset,'offset',offset,'tspan',tspan,'solver','rk1');
 % stats=CalcCellProperties(data); 
-% PlotData(data,'ylim',[-100 50]);
+% dsPlot(data,'ylim',[-100 50]);
 % fprintf('Cm=%gnF: taum=%gms (theory: taum=Rm*Cm)\n',model.parameters.Es_Cm,stats.Es.tau_m);
-% model=ApplyModifications(model,{'Es','Cm',.5*model.parameters.Es_Cm;'Ed','Cm',.5*model.parameters.Ed_Cm});
+% model=dsApplyModifications(model,{'Es','Cm',.5*model.parameters.Es_Cm;'Ed','Cm',.5*model.parameters.Ed_Cm});
 % data=ProbeCellProperties(model,'remove_connections_flag',0,'membrane_area',model.parameters.Es_area,'amplitudes',amps,'onset',onset,'offset',offset,'tspan',tspan,'solver','rk1');
 % stats=CalcCellProperties(data);
-% PlotData(data,'ylim',[-100 50]);
+% dsPlot(data,'ylim',[-100 50]);
 % fprintf('Cm=%gnF: taum=%gms (theory: taum=Rm*Cm)\n',model.parameters.Es_Cm,stats.Es.tau_m);
 %
 % See script PFC_cells_explicit.m for more details on model constraints.
-% See also: PFC_1layer, get_PFC_1layer, ApplyModifications, ProbeCellProperties
+% See also: PFC_1layer, get_PFC_1layer, dsApplyModifications, ProbeCellProperties
 
 % % Example: load and characterize FS model (taum) for different values of Cm
 % spec=get_PFC_cell('DS02FSjs'); % note: spec.populations.name = 'FS'
-% model=GenerateModel(spec);
+% model=dsGenerateModel(spec);
 % amps=[-2 -1 0 5 10]; onset=50; offset=250; tspan=[0 300];
 % data=ProbeCellProperties(model,'membrane_area',model.parameters.FS_area,'amplitudes',amps,'onset',onset,'offset',offset,'tspan',tspan,'solver','rk1');
 % stats=CalcCellProperties(data); 
-% PlotData(data,'ylim',[-100 50]);
+% dsPlot(data,'ylim',[-100 50]);
 % fprintf('Cm=%gnF: taum=%gms (theory: taum=Rm*Cm)\n',model.parameters.FS_Cm,stats.FS.tau_m);
-% model=ApplyModifications(model,{'FS','Cm',.5*model.parameters.FS_Cm});
+% model=dsApplyModifications(model,{'FS','Cm',.5*model.parameters.FS_Cm});
 % data=ProbeCellProperties(model,'membrane_area',model.parameters.FS_area,'amplitudes',amps,'onset',onset,'offset',offset,'tspan',tspan,'solver','rk1');
 % stats=CalcCellProperties(data);
-% PlotData(data,'ylim',[-100 50]);
+% dsPlot(data,'ylim',[-100 50]);
 % fprintf('Cm=%gnF: taum=%gms (theory: taum=Rm*Cm)\n',model.parameters.FS_Cm,stats.FS.tau_m);
 
 % % Example: load and characterize multicompartment PY model (taum) for
 % % different values of Rm (Rin) with current applied to soma
 % spec=get_PFC_cell('DS02PYjs');
-% model=GenerateModel(spec);
+% model=dsGenerateModel(spec);
 % amps=[-2 -1 0 5 10]/5; onset=50; offset=250; tspan=[0 300];
 % data=ProbeCellProperties(model,'remove_connections_flag',0,'membrane_area',model.parameters.Es_area,'amplitudes',amps,'onset',onset,'offset',offset,'tspan',tspan,'solver','rk1');
 % stats=CalcCellProperties(data); 
-% PlotData(data,'ylim',[-100 50]);
+% dsPlot(data,'ylim',[-100 50]);
 % fprintf('Rin(Es)=%gMOhm: taum(Es)=%gms (theory: taum=Rm*Cm, Rin=Rm/area)\n',1/model.parameters.Es_pas_gpas,stats.Es.tau_m);
-% model=ApplyModifications(model,{'Es','gpas',2*model.parameters.Es_pas_gpas;'Ed','gpas',2*model.parameters.Ed_pas_gpas});
+% model=dsApplyModifications(model,{'Es','gpas',2*model.parameters.Es_pas_gpas;'Ed','gpas',2*model.parameters.Ed_pas_gpas});
 % data=ProbeCellProperties(model,'remove_connections_flag',0,'membrane_area',model.parameters.Es_area,'amplitudes',amps,'onset',onset,'offset',offset,'tspan',tspan,'solver','rk1');
 % stats=CalcCellProperties(data);
-% PlotData(data,'ylim',[-100 50]);
+% dsPlot(data,'ylim',[-100 50]);
 % fprintf('Rin(Es)=%gMOhm: taum(Es)=%gms (theory: taum=Rm*Cm, Rin=Rm/area)\n',1/model.parameters.Es_pas_gpas,stats.Es.tau_m);
 
 % created by JSS on 11-Apr-2016, contact: sherfey@bu.edu
