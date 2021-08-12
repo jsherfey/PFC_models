@@ -31,7 +31,7 @@ Kee=ones(Ne)-eye(Ne); % PY->PY connectivity matrix; e.g., all-to-all excluding s
 modifications={...
   'Es','Cm',1.5*Cm_soma;      % increase by 50% the value of Cm soma in superficial layer
   'Ed','Cm',1.5*Cm_soma*1.92; % preserve relationship b/w soma and dendritic capacitance in [DS02]
-  '(RSNP->FS','gGABA',1;      % RSNP inhibit FS cells (true for CR+ RSNP cells, less evidence for CB+ RSNP cells)
+  '(RSNP->FS)','gGABA',1;      % RSNP inhibit FS cells (true for CR+ RSNP cells, less evidence for CB+ RSNP cells)
   'FS->RSNP','gGABA',0;       % FS do not inhibit RSNP cells
   '(FS->FS,RSNP->RSNP)','gGABA',0; % remove within-population inhibition
   'Es->Ed','netcon',Kee       % set connectivity matrix from PY soma to dendrite

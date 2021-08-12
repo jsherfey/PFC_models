@@ -23,7 +23,7 @@ INMDA(X,s) = gNMDA.*BMg(X).*(s*netcon).*(X-ENMDA) % post-synaptic NMDA current
 s' = NT(X_pre).*(1-s)/tauNMDAr-s/tauNMDA 	% first-order kinetics for two-state (open/closed) scheme. [s]=fraction of receptors in open state
 s(0) = IC+IC_noise*rand(1,N_pre)
 
-monitor functions % always record the synaptic current
+%monitor functions % always record the synaptic current
 
 % linkers
 @current += -INMDA(X_post,s)

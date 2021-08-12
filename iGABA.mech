@@ -17,7 +17,7 @@ IGABA(X,s) = (gGABA.*(s*netcon).*(X-EGABA))
 s' = -s./tauGABA + ((1-s)/tauGABAr).*(1+tanh(X_pre/10))
 s(0) = IC+IC_noise.*rand(1,N_pre)
 
-monitor functions % always record the synaptic current
+%monitor functions % always record the synaptic current
  
 % linkers
 @current += -IGABA(X_post,s)
