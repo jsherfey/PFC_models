@@ -19,7 +19,8 @@ IKCa(X,c,@ko)=gkc.*c.^2.*(X-EK(@ko))
 
 % ODEs and ICs
 c'=(cinf(X,@cai)-c)./ctau(X,@cai)
-c(0)=cinf(-65,.05)+IC_noise.*rand(1,Npop)
+%c(0)=cinf(-65,.05)+IC_noise.*rand(1,Npop)
+c(0)=3.1228e-4+IC_noise.*rand(1,Npop)
 
 % Linkers
 @current += -IKCa(X,c,@ko)
